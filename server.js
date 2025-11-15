@@ -4,7 +4,8 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 app.use(express.json()); 
-const port = parseInt((process.env.PORT || 3001));
+let port = parseInt((process.env.PORT || '3001').toString().replace(/[; ]/g, '')) || 3001;
+if (port === 5000) port = 3001;
 app.use("/api/contacts" , require("./routes/contactRoutes"));
 app.listen(port ,() =>{
     console.log(`server runing at ${port}`);
