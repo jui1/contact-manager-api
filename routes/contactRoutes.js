@@ -1,27 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const  {getcontract }  = require("../controllers/contractController");
+const { create}  = require("../controllers/contractController");
 
-router.get( "/" , (req, res) =>{
-    res.status(200).json({message: "Get all the contract"});
-});
+const {update } = require("../controllers/contractController");
+const {getdelete} = require("../controllers/contractController");
+const {getid} = require("../controllers/contractController");
 
 
-router.post("/" , (req , res) =>{
-    res.status(200).json({message : "YES , create contract"});
-});
+router.get("/", getcontract);
 
-router.put("/:id" , (req , res) =>{
-    res.status(200).json({message: `yes contract the update and the id is ${req.params.id} `});
 
-});
+router.post("/" ,  create );
 
-router.delete("/:id" , (req, res) =>{
-    res.status(200).json({message : `yess its deletee and the id is ${req.params.id}`});
-});
+router.put("/:id" , update );
 
-router.get("/:id" , (req, res) =>{
-    res.status(200).json({message : `yess its contract and the id is ${req.params.id}`});
-});
+router.delete("/:id" ,getdelete);
+
+router.get("/:id" ,getid );
 
 
 module.exports =  router;
