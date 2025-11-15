@@ -2,9 +2,11 @@ const getcontract = (req, res) =>{
     res.status(200).json({message: "Get all the contract"});
 };
 
-const create = (req , res) =>{
-    res.status(200).json({message : "YES , create contract"});
+const create = (req, res) => {
+    console.log("Received body:", req.body);
+    res.status(201).json({ message: "Contract created successfully" });
 };
+
 
 
 const update =  (req , res) =>{
