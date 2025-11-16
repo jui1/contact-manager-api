@@ -14,28 +14,45 @@ const create = asyncHandler(async(req, res , next) => {
     res.status(400);
     return next(new Error("All fields are mandatory"));
   }
-
-  res.status(201).json({ message: "Contract created successfully !" });
+  const contact  = await Contact.create({
+    name,
+    email,
+    phone,
+    company
+  });
+    res.status(201).json(contact);
 });
 
 const update = asyncHandler(async(req, res) => {
-  res
-    .status(200)
-    .json({
-      message: `yes contract the update and the id is ${req.params.id} `,
-    });
+  const { id } = req.params;
+  const { name, email, phone, company } = req.body;
+  const updated = await Contact.findByIdAndUpdate(
+    id,
+    { name, email, phone, company },
+    { new: true, runValidators: true }
+  );
+  if (!updated) {
+    return res.status(404).json({ message: "Contact not found" });
+  }
+  res.status(200).json(updated);
 });
 
 const getdelete = asyncHandler(async(req, res) => {
-  res
-    .status(200)
-    .json({ message: `yess its deletee and the id is ${req.params.id}` });
+  const { id } = req.params;
+  const deleted = await Contact.findByIdAndDelete(id);
+  if (!deleted) {
+    return res.status(404).json({ message: "Contact not found" });
+  }
+  res.status(200).json(deleted);
 });
 
 const getid = asyncHandler(async(req, res) => {
-  res
-    .status(200)
-    .json({ message: `yess its contract and the id is ${req.params.id}` });
+  const { id } = req.params;
+  const contact = await Contact.findById(id);
+  if (!contact) {
+    return res.status(404).json({ message: "Contact not found" });
+  }
+  res.status(200).json(contact);
 });
 
 module.exports = { getcontract, create, update, getdelete, getid };
