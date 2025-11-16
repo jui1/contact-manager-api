@@ -8,6 +8,7 @@ let port = parseInt((process.env.PORT || '3001').toString().replace(/[; ]/g, '')
 if (port === 5000) port = 3001;
 const connectDb = require("./config/dbConfigaration");
 app.use("/api/contacts" , require("./routes/contactRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 app.use(require("./middleware/errorHandler"));
 (async () => {
 	try {
