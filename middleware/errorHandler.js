@@ -3,7 +3,7 @@ const errorHandeler = (err, req, res, next) => {
   const statusCode = res.statusCode ? res.statusCode : 500;
   res.status(statusCode);
 
-  switch(statusCode){
+   switch(statusCode){
     case Constacs.VALIDATION_ERROR :
     res.json({
       message: err.message,
@@ -59,5 +59,8 @@ const errorHandeler = (err, req, res, next) => {
 
 
 
-module.exports = errorHandeler;
+                            
+                           
+                       
+          module.exports = errorHandeler;
 
