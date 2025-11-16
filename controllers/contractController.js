@@ -1,7 +1,10 @@
 const asyncHandler = require("express-async-handler");
+const  Contact = require("../models/contravtModels");
+
 
 const getcontract = asyncHandler(async(req, res) => {
-  res.status(200).json({ message: "Get all the contract" });
+    const contracts =  await Contact.find();
+  res.status(200).json(contracts );
 });
 
 const create = asyncHandler(async(req, res , next) => {
