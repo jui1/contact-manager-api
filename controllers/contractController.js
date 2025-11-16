@@ -2,11 +2,12 @@ const getcontract = (req, res) => {
   res.status(200).json({ message: "Get all the contract" });
 };
 
-const create = (req, res) => {
+const create = (req, res , next) => {
   console.log("Received body:", req.body);
   const { name, email, phone, company } = req.body;
   if (!name || !email || !phone || !company) {
-    return res.status(400).json({ error: "All fields are mendatory" });
+    res.status(400);
+    return next(new Error("All fields are mandatory"));
   }
 
   res.status(201).json({ message: "Contract created successfully !" });
